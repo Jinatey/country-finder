@@ -1,0 +1,11 @@
+.navbar {
+  background-color: grey;
+}
+
+.texts {
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

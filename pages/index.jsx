@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import s from '../styles/Home.module.css';
 
 export default function Home() {
@@ -14,16 +14,18 @@ export default function Home() {
       });
   }, []);
 
-  console.log(Array.isArray(countries));
+  if (!countries.length) return <div>LOADING...</div>;
 
   return (
     <div>
       <div className={s.country}>
         {countries.map((country) => (
-          <div key={country.name} className={s.card}>
-            <img src={country.flags.png} alt='' />
-            <h2> {country.name} </h2>
-          </div>
+          <Link key={country.name} href={`/country/${country.name}`}>
+            <div className={s.card}>
+              <img src={country.flags.png} alt='' />
+              <h2> {country.name} </h2>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

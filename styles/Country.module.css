@@ -1,0 +1,17 @@
+.infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  gap: 2rem;
+}
+
+.wrap {
+  margin: 4rem;
+  height: 100vh;
+}
+
+.backButton {
+  background-color: silver;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+}
