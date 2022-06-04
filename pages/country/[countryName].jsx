@@ -4,26 +4,28 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import s from '../../styles/Country.module.css';
 
-const CountryName = () => {
-  const router = useRouter();
-  const [country, setCountry] = useState([]);
-  useEffect(() => {
-    if (!router.query.countryName) return;
+const CountryName = ({ country }) => {
+  // const router = useRouter();
+  if (!country) return <div>Loading!!!</div>;
+  // const [country, setCountry] = useState([]);
 
-    fetch(`https://restcountries.com/v2/name/${router.query.countryName}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (country.status === 404) {
-          router.replace('/');
-          // alert(country.message);
-        }
+  // useEffect(() => {
+  //   if (!router.query.countryName) return;
 
-        setCountry(data);
-      });
-  }, [country.status, router, router.query.countryName]);
+  //   fetch(`https://restcountries.com/v2/name/${router.query.countryName}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log(data);
+  //       if (country.status === 404) {
+  //         router.replace('/');
+  //         // alert(country.message);
+  //       }
 
-  if (!country.length) return <div className='loading'>Loading...</div>;
+  //       setCountry(data);
+  //     });
+  // }, [country.status, router, router.query.countryName]);
+
+  // if (!country.length) return <div className='loading'>Loading...</div>;
 
   return (
     <div className={s.wrap}>
@@ -68,5 +70,28 @@ const CountryName = () => {
     </div>
   );
 };
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(
+    `https://restcountries.com/v2/name/${params.countryName}`
+  );
+  const country = await res.json();
+
+  return {
+    props: {
+      country,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    // Only `/posts/1` and `/posts/2` are generated at build time
+    paths: [{ params: { countryName: 'Afghanistan' } }],
+    // Enable statically generating additional pages
+    // For example: `/posts/3`
+    fallback: true,
+  };
+}
 
 export default CountryName;

@@ -1,7 +1,16 @@
-.country {
-  /* padding: ; */
+
+.search{
   width: min(1100px, 100% - 2rem);
-margin:1rem auto;
+margin-inline: auto;
+
+}
+
+.country {
+padding-top: 2rem;
+
+  /* padding: ; */
+  /* width: min(1100px, 100% - 2rem);
+margin:1rem auto; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 4rem;
