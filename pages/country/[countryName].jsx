@@ -85,12 +85,17 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
+  const res = await fetch('https://restcountries.com/v2/all');
+  const countries = await res.json();
+
+  // const paths = countries.map((c) => ({ params: { countryName: c.name } }));
+
   return {
     // Only `/posts/1` and `/posts/2` are generated at build time
     paths: [{ params: { countryName: 'Afghanistan' } }],
     // Enable statically generating additional pages
     // For example: `/posts/3`
-    fallback: true,
+    fallback: false,
   };
 }
 
