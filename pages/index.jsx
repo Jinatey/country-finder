@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import s from '../styles/Home.module.css';
+import { icons } from 'react-icons';
+import {IoMdArrowBack} from 'react-icons/io'
 
 export default function Home({ countries }) {
   const [text, setText] = useState('');
@@ -42,7 +44,18 @@ export default function Home({ countries }) {
           <Link key={country.name} href={`/country/${country.name}`}>
             <div className={s.card}>
               <img src={country.flags.png} alt='' />
-              <h2> {country.name} </h2>
+              <div className={s.texts}>
+                <h2> {country.name} </h2>
+                <p>
+                  <span>Population:</span> {country.population}
+                </p>
+                <p>
+                  <span>Region:</span> {country.region}
+                </p>
+                <p>
+                  <span>Capital:</span> {country.capital}
+                </p>
+              </div>
             </div>
           </Link>
         ))}

@@ -4,14 +4,38 @@
   place-items: center;
   gap: 2rem;
 }
+.infoss {
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.infoss img{
+  box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
+
+}
+
 
 .wrap {
   margin: 4rem;
+  
   height: 100vh;
 }
 
 .backButton {
-  background-color: silver;
+  width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
   padding: 0.5rem 2rem;
   border-radius: 5px;
+}
+
+.backButton span{
+  padding-right: 0.5rem;
 }

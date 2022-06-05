@@ -2,7 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+
 import s from '../../styles/Country.module.css';
+
+import { icons } from 'react-icons';
+
+import {IoMdArrowBack} from 'react-icons/io'
 
 const CountryName = ({ country }) => {
   // const router = useRouter();
@@ -30,9 +35,9 @@ const CountryName = ({ country }) => {
   return (
     <div className={s.wrap}>
       <Link href='/'>
-        <a className={s.backButton}>Back</a>
+        <a className={s.backButton}><span><IoMdArrowBack/></span> Back</a>
       </Link>
-      <div className={s.infos}>
+      <div className={s.infoss}>
         <img src={country[0]?.flags.png} alt='' />
 
         <div className='texts'>
@@ -92,7 +97,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
