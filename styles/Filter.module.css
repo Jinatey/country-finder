@@ -1,0 +1,37 @@
+
+
+.filter{
+    box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 5px;
+    height: 50px;
+    padding: 0rem 2rem;
+    cursor: pointer;
+  }
+
+
+
+ .MB {
+/* padding: 0.5em 2rem; */
+display: flex;
+gap: 1rem;
+justify-content: center;
+align-items: center;
+height: 40px;
+border:none;
+background-color: #fff;
+border-radius: 5px;
+box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
+width:200px;
+
+  }
+
+ .ML{
+border-radius: 5px;
+box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
+width:200px;
+
+margin-top: 0.5rem;
+
+border: none;
+  }

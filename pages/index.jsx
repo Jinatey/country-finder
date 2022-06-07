@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import s from '../styles/Home.module.css';
 import { icons } from 'react-icons';
-import {IoMdArrowBack} from 'react-icons/io'
+import { IoMdArrowBack } from 'react-icons/io';
+import { BiSearch } from 'react-icons/bi';
+import Filter from '../components/Filter';
 
 export default function Home({ countries }) {
   const [text, setText] = useState('');
@@ -32,13 +34,21 @@ export default function Home({ countries }) {
 
   return (
     <div className={s.search}>
-      <input
-        className={s.searchbox}
-        placeholder='search a country'
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        type='text'
-      />
+      <div className={s.searchFilter}>
+        <label htmlFor=''>
+          <BiSearch className={s.icon} onClick={() => {}} />
+          <input
+            className={s.searchbox}
+            placeholder='search a country'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            type='text'
+          />
+        </label>
+       <Filter/>
+
+      </div>
+
       <div className={s.country}>
         {filteredCountries.map((country) => (
           <Link key={country.name} href={`/country/${country.name}`}>
