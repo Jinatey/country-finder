@@ -43,36 +43,34 @@ const CountryName = ({ country }) => {
         </a>
       </Link>
       <div className={s.infoss}>
-        <img src={country?.flags.png} alt='' />
+        <img src={country[0]?.flags.png} alt='' />
 
         <div className='texts'>
           <div>
             {' '}
-            <h2> {country?.name}</h2>
+            <h2> {country[0]?.name}</h2>
           </div>
           <div className={s.infos}>
             <div className='left'>
-              <p>Native Name: {country?.nativeName}</p>
-              <p>Population: {country?.population}</p>
-              <p>Region: {country?.region}</p>
-              <p>Subregion: {country?.subregion}</p>
-              <p>capital: {country?.capital}</p>
+              <p>Native Name: {country[0]?.nativeName}</p>
+              <p>Population: {country[0]?.population}</p>
+              <p>Region: {country[0]?.region}</p>
+              <p>Subregion: {country[0]?.subregion}</p>
+              <p>capital: {country[0]?.capital}</p>
             </div>
 
             <div className='right'>
-              <p>Top Level Domain: {country?.topLevelDomain}</p>
-              <p>Currencies: {country?.topLevelDomain}</p>
-              <p>Languages: {country?.topLevelDomain}</p>
+              <p>Top Level Domain: {country[0]?.topLevelDomain}</p>
+              <p>Currencies: {country[0]?.topLevelDomain}</p>
+              <p>Languages: {country[0]?.topLevelDomain}</p>
             </div>
           </div>
           <div className='bottom'>
-            {country?.borders && (
+            {country[0]?.border && (
               <p>
                 Border Countries:{' '}
-                {country?.borderCountries?.map((b) => (
-                  <Link href={`/country/${b.name}`} key={b.name} passHref>
-                    <button>{b.name}</button>
-                  </Link>
+                {country[0]?.borders.map((b) => (
+                  <button key={b}>{b}</button>
                 ))}
               </p>
             )}
@@ -87,29 +85,17 @@ export async function getStaticProps({ params }) {
   const res = await fetch(
     `https://restcountries.com/v2/name/${params.countryName}`
   );
-  const country = (await res.json())[0];
-
-  const borderCountryRes = country?.borders
-    ? await fetch(
-        `https://restcountries.com/v2/alpha?codes=${country?.borders.toString()}`
-      )
-    : null;
-
-  const borderCountries = await borderCountryRes?.json();
-  const updatedCountry = { ...country, borderCountries };
+  const country = await res.json();
 
   return {
     props: {
-      country: updatedCountry,
+      country,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const res = await fetch('https://restcountries.com/v2/all');
-  const countries = await res.json();
-
-  const paths = countries.map((c) => ({ params: { countryName: c.name } }));
+  const paths = [{ params: { countryName: 'Afghanistan' } }];
 
   return {
     paths: paths,
