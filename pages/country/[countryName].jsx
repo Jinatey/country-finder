@@ -1,36 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-
 import s from '../../styles/Country.module.css';
-
-import { icons } from 'react-icons';
-
 import { IoMdArrowBack } from 'react-icons/io';
 
 const CountryName = ({ country }) => {
-  // const router = useRouter();
   if (!country) return <div>Loading!!!</div>;
-  // const [country, setCountry] = useState([]);
 
-  // useEffect(() => {
-  //   if (!router.query.countryName) return;
-
-  //   fetch(`https://restcountries.com/v2/name/${router.query.countryName}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       // console.log(data);
-  //       if (country.status === 404) {
-  //         router.replace('/');
-  //         // alert(country.message);
-  //       }
-
-  //       setCountry(data);
-  //     });
-  // }, [country.status, router, router.query.countryName]);
-
-  // if (!country.length) return <div className='loading'>Loading...</div>;
+  console.log(country);
 
   return (
     <div className={s.wrap}>
@@ -43,34 +19,36 @@ const CountryName = ({ country }) => {
         </a>
       </Link>
       <div className={s.infoss}>
-        <img src={country[0]?.flags.png} alt='' />
+        <img src={country?.flags.png} alt='' />
 
         <div className='texts'>
           <div>
             {' '}
-            <h2> {country[0]?.name}</h2>
+            <h2> {country?.name}</h2>
           </div>
           <div className={s.infos}>
             <div className='left'>
-              <p>Native Name: {country[0]?.nativeName}</p>
-              <p>Population: {country[0]?.population}</p>
-              <p>Region: {country[0]?.region}</p>
-              <p>Subregion: {country[0]?.subregion}</p>
-              <p>capital: {country[0]?.capital}</p>
+              <p>Native Name: {country?.nativeName}</p>
+              <p>Population: {country?.population}</p>
+              <p>Region: {country?.region}</p>
+              <p>Subregion: {country?.subregion}</p>
+              <p>capital: {country?.capital}</p>
             </div>
 
             <div className='right'>
-              <p>Top Level Domain: {country[0]?.topLevelDomain}</p>
-              <p>Currencies: {country[0]?.topLevelDomain}</p>
-              <p>Languages: {country[0]?.topLevelDomain}</p>
+              <p>Top Level Domain: {country?.topLevelDomain}</p>
+              <p>Currencies: {country?.topLevelDomain}</p>
+              <p>Languages: {country?.topLevelDomain}</p>
             </div>
           </div>
           <div className='bottom'>
-            {country[0]?.border && (
+            {country?.borderCountries && (
               <p>
-                Border Countries:{' '}
-                {country[0]?.borders.map((b) => (
-                  <button key={b}>{b}</button>
+                Border Countriesborders:
+                {country?.borderCountries.map((b) => (
+                  <Link href={`/country/${b.name}`} key={b.name}>
+                    <button>{b.name} </button>
+                  </Link>
                 ))}
               </p>
             )}
@@ -82,14 +60,23 @@ const CountryName = ({ country }) => {
 };
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(
+  const response = await fetch(
     `https://restcountries.com/v2/name/${params.countryName}`
   );
-  const country = await res.json();
+  const country = (await response.json())[0];
+
+  const borderCountryResponse = country?.borders
+    ? await fetch(
+        `https://restcountries.com/v2/alpha?codes=${country?.borders.toString()}`
+      )
+    : null;
+
+  const borderCountries = await borderCountryResponse?.json();
+  const updatedCountry = { ...country, borderCountries };
 
   return {
     props: {
-      country,
+      country: updatedCountry,
     },
   };
 }

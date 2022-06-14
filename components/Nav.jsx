@@ -1,14 +1,22 @@
 import navS from '../styles/Nav.module.css';
 import { icons } from 'react-icons';
 import { MdOutlineDarkMode } from 'react-icons/md';
+import { useState } from 'react';
 
 const Nav = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div className={navS.navbar}>
+    <div className={`${navS.navbar} ${darkMode ? navS.navbarDark : ''}`}>
       <div className={navS.texts}>
         <h1>Where in the world</h1>
-        <p>
-          <MdOutlineDarkMode /> Dark Mode
+        <p    onClick={() => {
+              setDarkMode(!darkMode);
+            }}>
+          <MdOutlineDarkMode
+         
+          />{' '}
+          Dark Mode
         </p>
       </div>
     </div>
