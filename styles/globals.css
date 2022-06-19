@@ -1,7 +1,28 @@
+:root {
+  --dark-blue: hsl(209, 23%, 22%);
+  --very-dark-blue: hsl(207, 26%, 17%);
+  --very-dark-blue-light: hsl(200, 15%, 8%);
+  --dark-gray: hsl(0, 0%, 52%);
+  --very-light-gray: hsl(0, 0%, 98%);
+
+  /* light mode */
+  --bg: var(--very-light-gray);
+  --flag-bg: #fff;
+  --text: var(--very-dark-blue);
+}
+
+body.dark {
+  /* dark mode */
+  --bg: var(--very-dark-blue);
+  --flag-bg: var(--dark-blue);
+  --text: white;
+}
+
 html,
 body {
-  background-color: hsl(0, 0%, 97%);
-
+  background-color: var(--bg);
+  color: var(--text);
+min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -18,11 +39,10 @@ a {
 }
 
 .container {
-
   padding: 0 12rem;
 }
 
-img{
+img {
   display: block;
   width: 100%;
 }

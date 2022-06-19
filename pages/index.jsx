@@ -9,28 +9,16 @@ import Filter from '../components/Filter';
 
 export default function Home({ countries }) {
   const [text, setText] = useState('');
-
-  //   useEffect(() => {
-  //     async function getCountryData() {
-  //       const res = await fetch('https://restcountries.com/v2/all');
-  //       const data = await res.json();
-  //       setCountries(data);
-  //     }
-  //     getCountryData();
-  // //use effect therey meethi beynun kurey (react bunefa inty use effect therey data fetch nukuran// misaalakah react query beynun kuraany data fetch kuran)
-  //     // fetch('https://restcountries.com/v2/all')
-  //     //   .then((res) => res.json())
-  //     //   .then((data) => {
-  //     //     setCountries(data);
-  //     //   });
-  //   }, []);
+  const [filter, setFilter] = useState('');
 
   if (!countries.length) return <div>LOADING...</div>;
   console.log(text.toLowerCase());
 
-  const filteredCountries = countries.filter((c) =>
+  let filteredCountries = countries.filter((c) =>
     c.name.toLowerCase().includes(text.toLowerCase())
   );
+
+  let filteredCountriesss = countries?.filter((c) => c.region === filter);
 
   return (
     <div className={s.search}>
@@ -45,12 +33,14 @@ export default function Home({ countries }) {
             type='text'
           />
         </label>
-       <Filter/>
-
+        <Filter filter={filter} setFilter={setFilter} />
       </div>
 
       <div className={s.country}>
-        {filteredCountries.map((country) => (
+        {(text && filteredCountries.length
+          ? filteredCountries
+          : filteredCountriesss
+        )?.map((country) => (
           <Link key={country.name} href={`/country/${country.name}`}>
             <div className={s.card}>
               <img src={country.flags.png} alt='' />

@@ -1,10 +1,7 @@
 .navbar {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbarDark {
-  background-color: hsl(207, 26%, 17%);
-  color: aliceblue;
+  background-color:var(--flag-bg);
+color: var(--text);
 }
 
 .texts {

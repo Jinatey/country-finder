@@ -7,16 +7,21 @@ const Nav = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div className={`${navS.navbar} ${darkMode ? navS.navbarDark : ''}`}>
-      <div className={navS.texts}>
+    <div className={navS.navbar}>
+      <div className={navS.texts} onMouseDown={(e) => e.preventDefault()}>
         <h1>Where in the world</h1>
-        <p    onClick={() => {
-              setDarkMode(!darkMode);
-            }}>
-          <MdOutlineDarkMode
-         
-          />{' '}
-          Dark Mode
+        <p
+          onClick={() => {
+            if (darkMode) {
+              setDarkMode(false);
+              document.body.classList.remove('dark');
+            } else {
+              setDarkMode(true);
+              document.body.classList.add('dark');
+            }
+          }}
+        >
+          <MdOutlineDarkMode /> Dark Mode
         </p>
       </div>
     </div>

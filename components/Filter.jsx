@@ -1,33 +1,21 @@
-import React from 'react';
+import { useState } from 'react';
 import filterStyles from '../styles/Filter.module.css';
-import {
-  Menu,
-  MenuList,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  MenuPopover,
-  MenuLink,
-} from '@reach/menu-button';
+import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
 import '@reach/menu-button/styles.css';
 
-const Filter = () => {
+const Filter = ({ filter, setFilter }) => {
   return (
     <>
       <Menu>
-        <MenuButton className={filterStyles.MB} >
-          <p>Filter by region</p> <span aria-hidden>▾</span>
+        <MenuButton className={filterStyles.MB}>
+          <p>{filter || 'Filter by region'}</p> <span aria-hidden>▾</span>
         </MenuButton>
         <MenuList className={filterStyles.ML}>
-          <MenuItem onSelect={() => alert('Download')}>Download</MenuItem>
-          <MenuItem onSelect={() => alert('Copy')}>Create a Copy</MenuItem>
-          <MenuItem onSelect={() => alert('Mark as Draft')}>
-            Mark as Draft
-          </MenuItem>
-          <MenuItem onSelect={() => alert('Delete')}>Delete</MenuItem>
-          <MenuLink as='a' href='https://reacttraining.com/workshops/'>
-            Attend a Workshop
-          </MenuLink>
+          <MenuItem onSelect={() => setFilter('Africa')}>Afica</MenuItem>
+          <MenuItem onSelect={() => setFilter('America')}>America</MenuItem>
+          <MenuItem onSelect={() => setFilter('Asia')}>Asia</MenuItem>
+          <MenuItem onSelect={() => setFilter('Europe')}>Europe</MenuItem>
+          <MenuItem onSelect={() => setFilter('Oceania')}>Oceania</MenuItem>
         </MenuList>
       </Menu>
     </>

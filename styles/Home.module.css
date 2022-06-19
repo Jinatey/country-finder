@@ -1,7 +1,5 @@
-
-
 .country {
-padding-top: 2rem;
+  padding-top: 2rem;
 
   /* padding: ; */
   /* width: min(1100px, 100% - 2rem);
@@ -11,61 +9,52 @@ margin:1rem auto; */
   gap: 4rem;
 }
 
-
-
-.texts{
+.texts {
   margin-left: 1rem;
 }
 
-.texts p{
-  color: rgb(86, 84, 84)
+.texts p,
+.texts span {
+  color: var(--text);
 }
 
-.texts span{
-color: black;
-}
-
-.texts h2{
+.texts h2 {
   font-size: 1rem;
 }
 
 .card {
-
-  box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--flag-bg);
   max-width: 300px;
   cursor: pointer;
   border-radius: 5px;
-  
 }
 
 .card img {
-  border-radius:5px 5px 0px 0px ;
+  border-radius: 5px 5px 0px 0px;
   /* object-fit:contain; */
   height: 150px;
   /* width:200px; */
 }
 
-
-
-.search{
+.search {
   width: min(1100px, 100% - 2rem);
-margin-inline: auto;
-
+  margin-inline: auto;
 }
 
-.icon{
-  transform: translate(25px,5px);
+.icon {
+  transform: translate(25px, 5px);
   /* position:absolute */
   color: rgb(111, 118, 118);
 }
 
-
-.searchbox{
+.searchbox {
   border: none;
   border-radius: 5px;
+  background-color: var(--flag-bg);
 
-  box-shadow:0px 1px 6px rgba(0, 0, 0, 0.1);
+color: var(--text);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
   margin-left: -1rem;
   width: 350px;
   margin-top: 2rem;
@@ -73,10 +62,8 @@ margin-inline: auto;
   /* position: relative; */
 }
 
-.searchFilter{
-  display:  flex;
+.searchFilter {
+  display: flex;
   justify-content: space-between;
   align-items: flex-end;
-
 }
-
