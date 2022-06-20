@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import s from '../styles/Home.module.css';
 import { icons } from 'react-icons';
@@ -11,14 +11,18 @@ export default function Home({ countries }) {
   const [text, setText] = useState('');
   const [filter, setFilter] = useState('');
 
-  if (!countries.length) return <div>LOADING...</div>;
-  console.log(text.toLowerCase());
-
-  let filteredCountries = countries.filter((c) =>
+  const filterCountriesBySearch = countries?.filter((c) =>
     c.name.toLowerCase().includes(text.toLowerCase())
   );
 
-  let filteredCountriesss = countries?.filter((c) => c.region === filter);
+  const filterCountriesByRegion = countries?.filter((c) =>
+    c.region.includes(filter)
+  );
+
+  const filterToApply =
+    text && filterCountriesBySearch.length
+      ? filterCountriesBySearch
+      : filterCountriesByRegion;
 
   return (
     <div className={s.search}>
@@ -37,10 +41,7 @@ export default function Home({ countries }) {
       </div>
 
       <div className={s.country}>
-        {(text && filteredCountries.length
-          ? filteredCountries
-          : filteredCountriesss
-        )?.map((country) => (
+        {filterToApply?.map((country) => (
           <Link key={country.name} href={`/country/${country.name}`}>
             <div className={s.card}>
               <img src={country.flags.png} alt='' />
